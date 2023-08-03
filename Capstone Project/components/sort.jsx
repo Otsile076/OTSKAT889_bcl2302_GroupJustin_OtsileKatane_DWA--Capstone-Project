@@ -30,7 +30,13 @@ export default SortBy;
 
 
 
-
+<div>
+      <form className="Nav">
+        <input type="text" placeholder="movie" name="seacrh here" />
+        <input type="text" placeholder="genre" name="genre" />
+        <button type="button" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
 
 
 
