@@ -1,4 +1,6 @@
+
 .Content {
+    background-color: grey;
     display: flex;
     flex-wrap:wrap;
     gap: 20px ;
@@ -15,22 +17,27 @@
     height: 300px;
   }
   h2 {
+    color: whitesmoke;
     margin-top: 10px;
   }
   p {
+    color: whitesmoke;
     margin-top: 5px;
   } */
   
   .ShowCard {
+    color: white;
     border: 1px solid #8F7F7F;
     padding: 10px;
     border-radius: 4px;
     display: flex;
     flex-wrap: wrap;
+  
+  
   }
   
   .ShowCard h2{
-    display:none;
+    display:show;
   }
   
   
