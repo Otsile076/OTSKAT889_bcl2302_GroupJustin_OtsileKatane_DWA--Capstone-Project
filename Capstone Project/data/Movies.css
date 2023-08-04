@@ -1,44 +1,50 @@
-
+/* CSS for the Content container */
 .Content {
-    background-color: grey;
-    display: flex;
-    flex-wrap:wrap;
-    gap: 20px ;
-      }
-  .ContentList {
-    display: flex;
-    flex-wrap: wrap;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    
-  }
-   
-  .ShowCard img {
-    width: 300px;
-    height: 300px;
-  }
-  h2 {
-    color: whitesmoke;
-    margin-top: 10px;
-  }
-  p {
-    color: whitesmoke;
-    margin-top: 5px;
-  } */
-  
-  .ShowCard {
-    color: white;
-    border: 1px solid #8F7F7F;
-    padding: 10px;
-    border-radius: 4px;
-    display: flex;
-    flex-wrap: wrap;
-  
-  
-  }
-  
-  .ShowCard h2{
-    display:show;
-  }
+  font-family: Arial, sans-serif;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* CSS for the ContentList container */
+.ContentList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* CSS for the ShowCard */
+.ShowCard {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* CSS for the ShowCard image */
+.ShowCard img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+/* CSS for the ShowCard title */
+.ShowCard h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+/* CSS for the ShowCard description */
+.ShowCard p {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+}
+
   
   
   

@@ -1,0 +1,63 @@
+/* CSS for the sort-order container */
+.sort {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* CSS for the Sort by label and dropdown */
+  .sort-order label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px;
+  }
+  
+  .sort-order select {
+    font-size: 1rem;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* CSS for the Search bar and Genre bar */
+  .search-bar,
+  .genre-bar {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .search-bar label,
+  .genre-bar label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px;
+  }
+  
+  .search-bar input[type="text"],
+  .genre-bar input[type="text"] {
+    font-size: 1rem;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1;
+  }
+  
+  .search-bar button,
+  .genre-bar button {
+    font-size: 1rem;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
