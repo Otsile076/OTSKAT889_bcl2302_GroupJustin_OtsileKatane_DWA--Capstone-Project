@@ -1,42 +1,146 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* App Container */
+.app {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #2a2a2a;
+  color: #fff;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Header */
+header {
   text-align: center;
+  margin-bottom: 30px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.head {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Search Bar */
+input[type='text'] {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #444;
+  color: #fff;
+  outline: none;
+  font-size: 1rem;
+}
+
+button {
+  margin-left: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Main Content */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+
+button {
+  margin: 5px;
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Show Previews */
+.show-preview {
+  display: flex;
+  align-items: center;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.show-preview img {
+  max-width: 100px;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+.show-info {
+  flex: 1;
+}
+
+.show-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.show-description {
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+.show-genres {
+  margin-top: 5px;
+}
+
+.show-genre {
+  margin-right: 5px;
+  font-size: 0.9rem;
+  background-color: #007bff;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+/* Progress Bar */
+.progress-bar {
+  width: 100%;
+  background-color: #444;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress {
+  background-color: #007bff;
+  height: 100%;
+}
+
+/* Timestamps */
+.timestamps {
+  font-size: 0.9rem;
+}
+
+/* Favorites List (Not Included in this CSS) */
+/* .favorites-list {
+  // Define your styling for favorites list here.
+} */
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .show-preview {
+    flex-direction: column;
+    text-align: center;
   }
-  to {
-    transform: rotate(360deg);
+
+  .show-preview img {
+    margin-right: 0;
+    margin-bottom: 10px;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
