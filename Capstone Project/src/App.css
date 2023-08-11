@@ -1,146 +1,143 @@
-/* App Container */
-.app {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  background-color: #2a2a2a;
-  color: #fff;
-  padding: 20px;
-  min-height: 100vh;
+/* Reset default margin and padding */
+body, h1, h2, p, button, input {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
 }
 
-/* Header */
+/* Set a background color */
+body {
+  background-color: #222;
+}
+
+/* Header styles */
 header {
-  text-align: center;
-  margin-bottom: 30px;
+  background-color: #000;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .head {
-  font-size: 2.5rem;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-/* Search Bar */
-input[type='text'] {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
-  background-color: #444;
-  color: #fff;
-  outline: none;
-  font-size: 1rem;
-}
-
-button {
-  margin-left: 10px;
-  padding: 8px 16px;
+  font-size: 50px;
+  align-content: center;
   background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 1rem;
+  font-family: 'Times New Roman', Times, serif;
 }
 
-/* Main Content */
+header input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 250px;
+  margin-right: 10px;
+}
+
+header button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* Main content */
 main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 20px;
 }
 
 h2 {
-  font-size: 1.8rem;
-  letter-spacing: 1px;
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #007bff;
 }
 
 button {
-  margin: 5px;
   background-color: #007bff;
   color: #fff;
-  padding: 8px 16px;
   border: none;
-  border-radius: 4px;
-  font-size: 1rem;
+  border-radius: 5px;
+  padding: 8px 16px;
+  margin-right: 10px;
   cursor: pointer;
 }
 
-/* Show Previews */
+/* ShowPreview styles */
 .show-preview {
-  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 10px 0;
   align-items: center;
-  border: 1px solid #444;
-  border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 10px;
-  width: 100%;
 }
 
 .show-preview img {
   max-width: 100px;
-  border-radius: 8px;
-  margin-right: 20px;
+  margin-right: 15px;
+  border-radius: 5px;
 }
 
-.show-info {
-  flex: 1;
+.show-details {
+  flex-grow: 1;
 }
 
 .show-title {
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 18px;
+  color: #007bff;
+  margin-bottom: 5px;
 }
 
 .show-description {
-  font-size: 1rem;
-  margin-top: 5px;
-}
-
-.show-genres {
-  margin-top: 5px;
-}
-
-.show-genre {
-  margin-right: 5px;
-  font-size: 0.9rem;
-  background-color: #007bff;
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-
-/* Progress Bar */
-.progress-bar {
-  width: 100%;
-  background-color: #444;
-  height: 10px;
-  border-radius: 5px;
-  overflow: hidden;
+  font-size: 14px;
+  color: #ccc;
   margin-bottom: 10px;
+  content: show;
 }
 
-.progress {
-  background-color: #007bff;
-  height: 100%;
+/* Favorite button style */
+.favorite-button {
+  background-color: transparent;
+  color: #007bff;
+  border: none;
+  cursor: pointer;
 }
 
-/* Timestamps */
-.timestamps {
-  font-size: 0.9rem;
+.favorite-button:hover {
+  color: #ff5733; /* Futuristic accent color */
 }
 
-/* Favorites List (Not Included in this CSS) */
-/* .favorites-list {
-  // Define your styling for favorites list here.
-} */
-
-/* Media Queries */
-@media (max-width: 768px) {
-  .show-preview {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .show-preview img {
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
+/* EpisdePreview styles */
+.episode-preview {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 5px;
 }
+
+/* AudioPlayer styles */
+.audio-player {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.audio-player button {
+  background-color: transparent;
+  color: #007bff;
+  border: none;
+  cursor: pointer;
+}
+
+.audio-player button:hover {
+  color: #ff5733; /* Futuristic accent color */
+}
+
+/* ShowList styles */
+.show-list {
+  margin-top: 10px;
+  
+}
+
+
