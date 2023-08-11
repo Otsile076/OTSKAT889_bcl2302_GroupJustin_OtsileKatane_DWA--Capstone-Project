@@ -1,110 +1,159 @@
-
-import React, { useState, useEffect } from 'react';
-import { fetchShows } from './Components/Data';
-import ShowPreview from './Components/ShowPreview';
-import './App.css'
-import AudioPlayer from './Components/Audio';
-import ShowDetails from './Components/ShowDetails';
-import ShowList from './Components/ShowList';
-import EpisodePreview from './Components/Episodes';
-
-  function App() {
-    const [showPreviews, setShowPreviews] = React.useState([]);
-    const [favorites, setFavorites] = useState([]);
-    const [sortBy, setSortBy] = useState('');
-    const [searchQuery, setSearchQuery] = useState('');
+import React, { useState, useEffect, Fragment } from 'react';
+import { fetchShows, fetchShowDetails } from './Components/Data';
+import ShowPreview from './components/ShowPreview';
+import './App.css';
+import Login from './Components/Login';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 
-    const handleSearch = () => {
-      // Filter the showPreviews based on the searchQuery
-      const filteredShows = showPreviews.filter((show) => {
-        const title = show.title.toLowerCase();
-        const description = show.description.toLowerCase();
-        const genres = show.genres.map((genre) => genre.toLowerCase());
-
-        return title.includes(searchQuery.toLowerCase()) || description.includes(searchQuery.toLowerCase()) || genres.includes(searchQuery.toLowerCase());
-      });
-
-      // Update the showPreviews state with the filtered shows
-      setShowPreviews(filteredShows);
-    };
-
-
-    useEffect(() => {
-      const getShowPreviews = async () => {
-        try {
-          const previews = await fetchShows();
-          setShowPreviews(previews);
-        } catch (error) {
-          console.error('Error fetching show previews:', error);
-        }
-      };
-      getShowPreviews();
-    }, []);
-
-    function sortShows(criteria) {
-      setSortBy(criteria);
-      let sortedShows = [...showPreviews];
-
-      switch (criteria) {
-        case 'titleAZ':
-          sortedShows.sort((a, b) => a.title.localeCompare(b.title));
-          break;
-        case 'titleZA':
-          sortedShows.sort((a, b) => b.title.localeCompare(a.title));
-          break;
-        case 'dateUpdatedAscending':
-          sortedShows.sort((a, b) => new Date(a.updated) - new Date(b.updated));
-          break;
-        case 'dateUpdatedDescending':
-          sortedShows.sort((a, b) => new Date(b.updated) - new Date(a.updated));
-          break;
-        default:
-          break;
-      }
-
-      setShowPreviews(sortedShows);
+const sortShows = (shows, order, criteria) => {
+  const compareFunction = (a, b) => {
+    if (order === 'asc') {
+      return a[criteria] > b[criteria] ? 1 : -1;
+    } else {
+      return a[criteria] < b[criteria] ? 1 : -1;
     }
+  };
+  return shows.slice().sort(compareFunction);
+};
 
-    const removeFromFavorites = (episodeId) => {
-      setFavorites(favorites.filter((id) => id !== episodeId));
+const App = () => {
+  const [showPreviews, setShowPreviews] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedShow, setSelectedShow] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [selectedSeason, setSelectedSeason] = useState(null);
+  const [view, setView] = useState('startPhase');
+  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortCriteria, setSortCriteria] = useState('title');
+  const [isLoggedIn, setIsLoggedIn] = useState('signUpPhase');
+
+  const handleSearch = () => {
+    setLoading(true);
+    try {
+      const searchResults = showPreviews.filter(show => show.title.toLowerCase().includes(searchQuery.toLowerCase()));
+      setShowPreviews(searchResults);
+    } catch (error) {
+      console.error('Error during search:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+
+  const handleShowClick = async (showId) => {
+    try {
+      setLoading(true);
+      const data = await fetchShowDetails(showId);
+      setSelectedShow(data);
+      setSelectedSeason(null);
+      setView('showDetail');
+    } catch (error) {
+      console.error('Error fetching show details:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSeasonClick = (seasonNumber) => {
+    setSelectedSeason(seasonNumber);
+  };
+
+  const sortedShows = sortShows(showPreviews, sortOrder, sortCriteria);
+
+  useEffect(() => {
+    const getShowPreviews = async () => {
+      setLoading(true);
+      try {
+        const previews = await fetchShows();
+        setShowPreviews(previews);
+      } catch (error) {
+        console.error('Error fetching show previews:', error);
+      } finally {
+        setLoading(false);
+      }
     };
+    getShowPreviews();
+  }, []);
+  
 
-    return (
-      <div className="app">
-        <header>
-          <h1 className="head">Intermission!!!</h1>
-          <div>
-            <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search Podcasts" />
-            <button onClick={handleSearch}>Search</button>
-          </div>
-        </header>
-        <main>
-          <div>
-            <h2>Shows</h2>
-            <div>
-              <button onClick={() => sortShows('titleAZ')}>Sort by Title A-Z</button>
-              <button onClick={() => sortShows('titleZA')}>Sort by Title Z-A</button>
-              <button onClick={() => sortShows('dateUpdatedAscending')}>Sort by Date Updated (Ascending)</button>
-              <button onClick={() => sortShows('dateUpdatedDescending')}>Sort by Date Updated (Descending)</button>
-            </div>
-            {showPreviews.map((show) => (
-              <ShowPreview key={show.id} show={show} description={show.description}favorites={favorites} preview={EpisodePreview} setFavorites={setFavorites} ShowDetails={ShowDetails} showList={ShowList}
-                audio={AudioPlayer} />
-            ))}
-          </div>
-
-          {/*<FavoritesList
-              favorites={favorites}
-              showPreviews={showPreviews}
-              removeFromFavorites={removeFromFavorites}
-              />*/}
-        </main>
-      </div>
-    );
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
+  return (
+    <div className="app-container">
+      <header>
+        
+        
+<h1 className="head">Intermission!!!</h1>
+      </header>
+      <main>
+        <div className="action-buttons">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button onClick={handleSearch}>Search</button>
+          <button onClick={() => setSortOrder('asc')}>Sort Ascending</button>
+          <button onClick={() => setSortOrder('desc')}>Sort Descending</button>
+          <button onClick={() => setSortCriteria('title')}>Sort by Title</button>
+          <button onClick={() => setSortCriteria('seasons')}>Sort by Seasons</button>
+        </div>
+        {view === 'showDetail' && selectedShow ? (
+          <div className="episodes-container">
+            <button onClick={() => setView('startPhase')}>Back to Show List</button>
+            <div>
+              <h2>{selectedShow.title}</h2>
+              {selectedShow.seasons.map((season) => (
+                <div key={season.number}>
+                  <h3>Season {season.number}</h3>
+                  {selectedSeason === season.number ? (
+                    <ul>
+                      {season.episodes.map((episode) => (
+                        <Fragment key={episode.id}>
+                          <h4>{episode.name}</h4>
+                          <li>{episode.title}</li>
+                          <p>{episode.description}</p>
+                          <audio controls>
+                            <source src={episode.file} />
+                          </audio>
+                        </Fragment>
+                      ))}
+                    </ul>
+                  ) : (
+                    <div className="image--">
+                      <img className="showImg" src={season.image} alt={`Season ${season.number}`} />
+                      <div>{season.episodes.length} Episodes</div>
+                      <button onClick={() => handleSeasonClick(season.number)}>View Episodes</button>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div>
+            <h2>Shows</h2>
+            {/*<Carousel>*/}
+              {sortedShows.map((show) => (
+                <ShowPreview key={show.id} 
+                show={show} 
+                handleShowClick={handleShowClick} />
+              ))}
+            {/*</Carousel>*/}
+          </div>
+        )}
+      </main>
+    </div>
+  );
+};
+
 export default App;
+
 
 
 
