@@ -6,6 +6,7 @@ import Login from './Components/Login';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 //import Loading from './Components/Loading';
+import 'tailwindcss/tailwind.css'
 
 
 const sortShows = (shows, order, criteria) => {
